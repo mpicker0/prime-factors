@@ -37,7 +37,7 @@ to run many times in a row.  To do this, first start `sbt`:
 
 Then, at the `sbt>` prompt, enter the arguments:
 
-    18
+    run 18
 
 After the program runs, you will still be at the `sbt>` prompt and can enter
 additional numbers.
