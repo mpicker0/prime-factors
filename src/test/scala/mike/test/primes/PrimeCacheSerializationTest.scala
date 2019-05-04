@@ -6,7 +6,7 @@ import io.circe.parser._
 import mike.test.primes.Primes.PrimeCache
 
 class PrimeCacheSerializationTest extends FunSpecLike with Matchers {
-  val primeCache = Map(2 -> Seq(2), 4 -> Seq(2, 2))
+  val primeCache: PrimeCache = Map(2L -> Seq(2L), 4L -> Seq(2L, 2L))
   val primeJson = """{"2":[2],"4":[2,2]}"""
 
   describe("conversion") {

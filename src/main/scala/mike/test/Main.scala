@@ -31,9 +31,9 @@ object Main {
       System.exit(1)
     }
 
-    val numberToFactorOpt = Try(args(0).toInt).toOption
+    val numberToFactorOpt = Try(args(0).toLong).toOption
     if(numberToFactorOpt.isEmpty || numberToFactorOpt.get <= 1) {
-      println(s"Please enter a number greater than 1 and less than ${Integer.MAX_VALUE}")
+      println(s"Please enter a number greater than 1 and less than ${Long.MaxValue}")
       System.exit(1)
     }
     val numberToFactor = numberToFactorOpt.get
