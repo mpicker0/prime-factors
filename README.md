@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/mpicker0/prime-factors.svg?style=svg)](https://circleci.com/gh/mpicker0/prime-factors)
+
 # Prime factorization
 
 This program finds and prints the prime factors of a given number.  It also
