@@ -3,9 +3,12 @@ package mike.test.primes
 import mike.test.primes.Primes.PrimeCache
 
 trait Primes {
+  private def candidates(from: Long, to: Long): Stream[Long] =
+    if(from > to) Stream.empty else from #:: candidates(from + 1L, to)
+
   /** Recursive prime factorization, kicked off by getPrimes */
-  private def getPrimesRec(i: Int, list: Seq[Int]): Seq[Int] = {
-    val optNextFactor = (2 to i).find(p => i % p == 0)
+  private def getPrimesRec(i: Long, list: Seq[Long]): Seq[Long] = {
+    val optNextFactor = candidates(2L, i).find(p => i % p == 0)
     optNextFactor.map { nextFactor =>
       getPrimesRec(i / nextFactor, list :+ nextFactor)
     }.getOrElse(list)
@@ -18,7 +21,7 @@ trait Primes {
     * @return a tuple containing the prime factors, and an updated cache for
     *         use in future calls
     */
-  def getPrimes(i: Int, cache: PrimeCache): (Seq[Int], PrimeCache) =
+  def getPrimes(i: Long, cache: PrimeCache): (Seq[Long], PrimeCache) =
     if(cache.contains(i)) (cache(i), cache)
     else {
       val primes = getPrimesRec(i, Nil)
@@ -27,6 +30,6 @@ trait Primes {
 }
 
 object Primes extends Primes {
-  type PrimeCache = Map[Int, Seq[Int]]
+  type PrimeCache = Map[Long, Seq[Long]]
   val emptyCache: PrimeCache = Map.empty
 }

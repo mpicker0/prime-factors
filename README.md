@@ -54,7 +54,7 @@ The design is very basic in the spirit of not overengineering the program.
 The prime factorization algorithm is using trial division and is not very
 efficient, but this can be mitigated by the cache.
 
-The cache is just a `Map[Int, Seq[Int]]` and maintained as JSON on the
+The cache is just a `Map[Long, Seq[Long]]` and maintained as JSON on the
 filesystem so it survives between runs of the program.  I wanted a simple way
 to handle persistence, so a file made sense, and
 [Circe](https://github.com/circe/circe) was used to handle converting to/from
@@ -67,11 +67,9 @@ Tests are provided for the prime factorization as well as JSON conversion.
 There are currently several limitations but these can be overcome given more
 time:
 
-* Integer range:  the program is limited to values in the `Int` range, which
-  has a maximum of 2^32 - 1.  I considered using `BigInt` but this was not
-  straightforward to encode/decode with Circe.  I also considered `Long` but
-  Scala's range type (`2 to i`) is limited by the size of `Int`.  A possible
-  solution would be to use a `Stream` instead of a range.
+* Integer range:  the program is limited to values in the `Long` range, which
+  has a maximum of 2^63 - 1.  I considered using `BigInt` but this was not
+  straightforward to encode/decode with Circe.
 * The algorithm is not efficient.  It would be more efficient to divide the
   number to be factored by prime numbers, rather than trying everything from 2
   to the number.  However, it performs well enough given the other
