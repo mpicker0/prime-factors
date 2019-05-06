@@ -56,7 +56,7 @@ The design is very basic in the spirit of not overengineering the program.
 The prime factorization algorithm is using trial division and is not very
 efficient, but this can be mitigated by the cache.
 
-The cache is just a `Map[Long, Seq[Long]]` and maintained as JSON on the
+The cache is just a `Map[BigInt, Seq[BigInt]]` and maintained as JSON on the
 filesystem so it survives between runs of the program.  I wanted a simple way
 to handle persistence, so a file made sense, and
 [Circe](https://github.com/circe/circe) was used to handle converting to/from
@@ -66,15 +66,11 @@ Tests are provided for the prime factorization as well as JSON conversion.
 
 ## Future enhancements
 
-There are currently several limitations but these can be overcome given more
-time:
+There are currently some limitations but these can be overcome given more time:
 
-* Integer range:  the program is limited to values in the `Long` range, which
-  has a maximum of 2^63 - 1.  I considered using `BigInt` but this was not
-  straightforward to encode/decode with Circe.
 * The algorithm is not efficient.  It would be more efficient to divide the
   number to be factored by prime numbers, rather than trying everything from 2
-  to the number.  However, it performs well enough given the other
-  limitations.
+  to the number.  However, it performs well enough given reasonably sized
+  input.
 * The user interface could be improved.   
      

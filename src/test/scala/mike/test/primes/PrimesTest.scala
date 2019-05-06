@@ -36,6 +36,14 @@ class PrimesTest extends FunSpecLike with Matchers {
       primes shouldBe expectedFactors
       cache shouldBe Map(bigNum -> expectedFactors)
     }
+
+    it("should work with numbers bigger than Long.MaxValue") {
+      val bigNum = BigInt(2).pow(64)
+      val expectedFactors = Seq.fill(64)(2)
+      val (primes, cache) = Primes.getPrimes(bigNum, emptyCache)
+      primes shouldBe expectedFactors
+      cache shouldBe Map(bigNum -> expectedFactors)
+    }
   }
 
 }

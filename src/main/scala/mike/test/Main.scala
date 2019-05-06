@@ -4,7 +4,7 @@ import java.io.{BufferedWriter, File, FileWriter}
 import java.nio.file.Files.isRegularFile
 
 import mike.test.primes.Primes
-import mike.test.primes.Primes.PrimeCache
+import mike.test.primes.Primes._
 import io.circe.syntax._
 import io.circe.parser._
 
@@ -31,9 +31,9 @@ object Main {
       System.exit(1)
     }
 
-    val numberToFactorOpt = Try(args(0).toLong).toOption
+    val numberToFactorOpt = Try(BigInt(args(0))).toOption
     if(numberToFactorOpt.isEmpty || numberToFactorOpt.get <= 1) {
-      println(s"Please enter a number greater than 1 and less than ${Long.MaxValue}")
+      println(s"Please enter a number greater than 1")
       System.exit(1)
     }
     val numberToFactor = numberToFactorOpt.get
